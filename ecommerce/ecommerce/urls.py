@@ -1,13 +1,16 @@
-from core.views import CartView, FilterCategoryView, HomePageView, \
-    ItemDetailView, ProfileView, SearchView, SignupView, \
-    remove_user_cart, checkout, update_user_cart, ActivateAccount
-
+from core.views import (ActivateAccount, CartView, FilterCategoryView,
+                        HomePageView, ItemDetailView, ProfileView, SearchView,
+                        SignupView, checkout, remove_user_cart,
+                        update_user_cart)
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView, \
-    PasswordResetView, PasswordChangeView, PasswordResetDoneView, \
-    PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import (LoginView, LogoutView,
+                                       PasswordChangeView,
+                                       PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetDoneView,
+                                       PasswordResetView)
 from django.urls import path
 
 urlpatterns = [
