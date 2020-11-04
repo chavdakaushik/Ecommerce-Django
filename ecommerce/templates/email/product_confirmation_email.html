@@ -1,0 +1,6 @@
+Hi {{user.username}}
+Your products list is :
+{% for i in items %}
+{{i.product.name}}({{i.quantity}})--{{i.get_total}}
+{% endfor %}
+Total: ${{cart.get_cart_total|floatformat:2}}

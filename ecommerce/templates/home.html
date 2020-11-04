@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li class="active">Home</li>
+                <!-- <li class="active">New Products</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
+<!--prdt-starts-->
+<div class="prdt">
+    <div class="container">
+        <div class="prdt-top">
+            <div class="col-md-9 prdt-left">
+                <div class="product-one">
+                    {% for product in products %}
+                    <div class="col-md-4 product-left p-left" style="padding-bottom: 30px;">
+                        <div class="product-main simpleCart_shelfItem">
+                            <a href="{% url 'singleItem' product.id %}" class="mask"><img class="img-responsive zoom-img" src="{{product.imageURL}}" alt="{{product.name}}" /></a>
+                            <div class="product-bottom">
+                                <h3>{{product.name}}</h3>
+                                <p>Explore Now</p>
+                                <h4><i onclick="updateUserCart({{product.id}}, 'add')" class="item_add" title="Add to cart"></i> <span class="item_price">$ {{product.price|floatformat:2}}</span></h4>
+                            </div>
+                            <div class="srch srch1">
+                                <span>-{{product.discount}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% block category %} {% include 'category.html' %} {% endblock category %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--product-end-->
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+$(function() {
+    var menu_ul = $(".menu_drop > li > ul"),
+        menu_a = $(".menu_drop > li > a");
+
+    menu_ul.hide();
+
+    menu_a.click(function(e) {
+        e.preventDefault();
+        if (!$(this).hasClass("active")) {
+            menu_a.removeClass("active");
+            menu_ul.filter(":visible").slideUp("normal");
+            $(this).addClass("active").next().stop(true, true).slideDown("normal");
+        } else {
+            $(this).removeClass("active");
+            $(this).next().stop(true, true).slideUp("normal");
+        }
+    });
+});
+</script>
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Products</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--start-single-->
+<div class="single contact">
+    <div class="container">
+        <div class="single-main">
+            <div class="col-md-9 single-main-left">
+                <div class="sngl-top">
+                    <div class="col-md-5 single-top-left">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li data-thumb="{{object.imageURL}}">
+                                    <div class="thumb-image"><img src="{{object.imageURL}}" data-imagezoom="true" class="img-responsive" alt="" /></div>
+                                </li>
+                                <li data-thumb="{{object.imageURL}}">
+                                    <div class="thumb-image"><img src="{{object.imageURL}}" data-imagezoom="true" class="img-responsive" alt="" /></div>
+                                </li>
+                                <li data-thumb="{{object.imageURL}}">
+                                    <div class="thumb-image"><img src="{{object.imageURL}}" data-imagezoom="true" class="img-responsive" alt="" /></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- FlexSlider -->
+                        <script src="{% static 'js/imagezoom.js' %}"></script>
+                        <script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+                        <link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+                        <script>
+                        // Can also be used with $(document).ready()
+                        $(window).load(function() {
+                            $(".flexslider").flexslider({
+                                animation: "slide",
+                                controlNav: "thumbnails",
+                            });
+                        });
+                        </script>
+                    </div>
+                    <div class="col-md-7 single-top-right">
+                        <div class="single-para simpleCart_shelfItem">
+                            <h2>{{object.name}}</h2>
+                            <div class="star-on">
+                                <ul class="star-footer">
+                                    <li>
+                                        <a href="#"><i> </i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i> </i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i> </i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i> </i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i> </i></a>
+                                    </li>
+                                </ul>
+                                <div class="review">
+                                    <a href="#"> 1 customer review </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <h5 class="item_price">$
+                                {{object.get_discount_price|floatformat:2}}&nbsp;
+                                <small><del>$&nbsp;{{object.price}}</del></small>
+                            </h5>
+                            <p>{{object.description}}</p>
+                            <div class="available">
+                                <ul>
+                                    <!-- 
+                                    <li class="size-in">
+                                        Size
+                                        <select>
+                                            <option>Large</option>
+                                            <option>Medium</option>
+                                            <option>small</option>
+                                            <option>Large</option>
+                                            <option>small</option>
+                                        </select>
+                                    </li>
+                                -->
+                                    <div class="clearfix"></div>
+                                </ul>
+                            </div>
+                            <ul class="tag-men">
+                                <li><span>CATEGOERY</span> <span class="women1">: {{object.category.name}},</span></li>
+                                <li><span>BRAND</span> <span class="women1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{object.brand.name}}</span></li>
+                            </ul>
+                            <a onclick="updateCart({{object.id}}, 'add')" class="add-cart item_add">ADD TO CART</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="tabs">
+                    <ul class="menu_drop">
+                        <li class="item2">
+                            <a href="#"><img src="{% static 'images/arrow.png' %}" alt="" />Additional information</a>
+                            <ul>
+                                <li class="subitem2">
+                                    <a href="#">
+                                        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
+                                        praesent luptatum zzril delenit augue duis dolore
+                                    </a>
+                                </li>
+                                <li class="subitem3">
+                                    <a href="#">
+                                        Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur
+                                        parum clari, fiant sollemnes
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item3">
+                            <a href="#"><img src="{% static 'images/arrow.png' %}" alt="" />Reviews (10)</a>
+                            <ul>
+                                <li class="subitem1">
+                                    <a href="#">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+                                        tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    </a>
+                                </li>
+                                <li class="subitem2">
+                                    <a href="#">
+                                        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
+                                        praesent luptatum zzril delenit augue duis dolore
+                                    </a>
+                                </li>
+                                <li class="subitem3">
+                                    <a href="#">
+                                        Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur
+                                        parum clari, fiant sollemnes
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="latestproducts">
+                    <div class="product-one">
+                        {% for item in related_item %}
+                        <div class="col-md-4 product-left p-left">
+                            <div class="product-main simpleCart_shelfItem">
+                                <a href="{% url 'singleItem' item.id %}" class="mask"><img class="img-responsive zoom-img" src="{{item.imageURL}}" alt="" /></a>
+                                <div class="product-bottom">
+                                    <h3>{{item.name}}</h3>
+                                    <p>Explore Now</p>
+                                    <h4>
+                                        <a class="item_add" href="#"><i></i></a> <span class="item_price">$ {{item.price}}</span>
+                                    </h4>
+                                </div>
+                                <div class="srch">
+                                    <span>-{{item.discount}}%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            {% block category %} {% include 'category.html' %} {% endblock category %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--end-single-->
+{% endblock %}

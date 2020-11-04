@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<!--start-breadcrumbs-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li class="active">Account / Register</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--end-breadcrumbs-->
+<!--register-starts-->
+<div class="register">
+    <form action="" method="post">
+        <div class="container">
+            <div class="register-top heading">
+                <h2>REGISTER</h2>
+            </div>
+            <div class="register-main">
+                {% csrf_token %}
+                <div class="col-md-6 account-left">
+                    {% if form.errors %} {% for field in form %} {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %} {% endif %}
+                    <input placeholder="Username" tabindex="1" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username" />
+                    <input placeholder="Email" tabindex="1" type="email" name="email" maxlength="254" id="id_email" />
+                    <input placeholder="Password" tabindex="1" type="password" name="password1" autocomplete="new-password" required="" id="id_password1" />
+                    <input placeholder="Retype password" tabindex="1" type="password" name="password2" autocomplete="new-password" required="" id="id_password2" />
+                </div>
+                <div class="col-md-6 account-right account-left">
+                    <h3>Already have an User ?</h3>
+                    <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="address submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </form>
+</div>
+<!--register-end-->
+{% endblock %}

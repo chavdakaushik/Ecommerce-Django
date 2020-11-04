@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<!--start-breadcrumbs-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Cart</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--end-breadcrumbs-->
+<!--start-ckeckout-->
+<div class="ckeckout">
+    <div class="container">
+        <div class="ckeck-top heading">
+            <h2>CART</h2>
+        </div>
+        <div class="ckeckout-top">
+            <div class="cart-items">
+                <h3>My Shopping Bag ({{cart.get_cart_items}})<span style="float: right;">Total: ${{cart.get_cart_total|floatformat:2}}</span></h3>
+                <div class="in-check">
+                    <ul class="unit">
+                        <li><span>Item</span></li>
+                        <li><span>Product Name</span></li>
+                        <li><span>Quantity</span></li>
+                        <li><span>Unit Price</span></li>
+                        <li><span>Delivery Details</span></li>
+                        <li></li>
+                        <div class="clearfix"></div>
+                    </ul>
+                    {% for item in items %}
+                    <ul class="cart-header">
+                        <div onclick="removeCartItem({{item.product.id}})" class="close1"></div>
+                        <li class="ring-in">
+                            <a href="{% url 'singleItem' item.product.id %}"><img src="{{item.product.imageURL}}" class="img-responsive" alt="{{item.product.name}}" style="height: 13%;" /></a>
+                        </li>
+                        <li><span class="name">{{item.product.name}}</span></li>
+                        <li>
+                            <span>
+                                <div class="quantity">
+                                    <img onclick="updateCart({{item.product.id}}, 'remove')" src="https://img.icons8.com/fluent-systems-regular/24/000000/minus.png" style="cursor: pointer;" />
+                                    <input type="text" name="name" value="{{item.quantity}}" style="width: 30px; text-align: center; border: none;" readonly />
+                                    <img onclick="updateCart({{item.product.id}}, 'add')" src="https://img.icons8.com/material-outlined/24/000000/plus.png" style="cursor: pointer;" />
+                                </div>
+                            </span>
+                        </li>
+                        <li><span class="cost">$ {{item.get_total}}</span></li>
+                        <li>
+                            <span>Free</span>
+                            <p>Delivered in 2-3 business days</p>
+                        </li>
+                        <div class="clearfix"></div>
+                    </ul>
+                    {% endfor %}
+                    <ul>
+                        <h3 class="b4" style="float: right;">
+                            <a href="{% url 'send' %}"><span class="label label-success">Checkout</span></a>
+                        </h3>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end-ckeckout-->
+{% endblock %}

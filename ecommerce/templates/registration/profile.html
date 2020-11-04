@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+    <br><br>
+    <a href="{% url 'change_password' %}">Change Password</a><br><br>
+    <a href="{% url 'password_reset' %}">Forgot Password</a><br><br>
+    <a href="{% url 'home' %}">Back</a>
+</form>
+{% endblock %}

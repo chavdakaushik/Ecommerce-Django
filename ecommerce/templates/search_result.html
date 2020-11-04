@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% load class_name %}
+{% block body %}
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <!-- <li class="active">New Products</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
+<!--prdt-starts-->
+<div class="prdt">
+    <div class="container">
+        <div class="prdt-top">
+            <div class="col-md-9 prdt-left">
+                <div class="product-one">
+                    {% for object in object_list %}
+                    <div class="col-md-4 product-left p-left">
+                        <div class="product-main simpleCart_shelfItem">
+                            <a href="{% url 'singleItem' object.id %}" class="mask"><img class="img-responsive zoom-img" src="{{object.imageURL}}" alt="{{object.name}}" /></a>
+                            <div class="product-bottom">
+                                <h3>{{object.name}}</h3>
+                                <p>Explore Now</p>
+                                <h4><i onclick="updateUserCart({{object.id}}, 'add')" class="item_add" title="Add to cart"></i> <span class="item_price">$ {{object.price|floatformat:2}}</span></h4>
+                            </div>
+                            <div class="srch srch1">
+                                <span>-{{object.discount}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            {% block category %} {% include 'category.html' %} {% endblock category %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--product-end-->
+{% endblock %}
